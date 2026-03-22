@@ -19,28 +19,29 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish Project
-        # Publicamos en una carpeta simple llamada "out"
+        # Publicamos específicamente el proyecto del lado del cliente
         run: dotnet publish -c Release -o out
 
-      - name: Find and Fix index.html
+      - name: Generate Index.html for GitHub
         run: |
-          # Buscamos donde sea que esté el index.html (o cualquier .html) y lo movemos a la raíz de 'out'
-          target_file=$(find out -name "index.html" | head -n 1)
-          if [ -z "$target_file" ]; then
-            target_file=$(find out -name "*.html" | head -n 1)
+          # En .NET 8 Web App, el archivo de salida se suele llamar 'wwwroot/_framework/blazor.webassembly.js'
+          # pero GitHub necesita un 'index.html' en la raíz. 
+          # Buscamos el archivo generado (que suele estar en out/wwwroot)
+          
+          cd out/wwwroot
+          # Si no existe index.html, lo creamos o renombramos el que exista
+          if [ ! -f index.html ]; then
+            cp $(find . -name "*.html" | head -n 1) index.html || echo "No HTML found"
           fi
           
-          echo "Archivo encontrado en: $target_file"
-          cp "$target_file" out/index.html
+          # Corrección del base href
+          sed -i 's|<base href="/" />|<base href="/portafolioweb/" />|g' index.html
           
-          # Aplicamos el cambio al archivo que acabamos de copiar
-          sed -i 's|<base href="/" />|<base href="/portafolioweb/" />|g' out/index.html
-          
-          # Creamos el archivo .nojekyll en la raíz de salida
-          touch out/.nojekyll
+          # Crear .nojekyll para que GitHub no bloquee carpetas con guion bajo (_)
+          touch .nojekyll
 
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: out # Subimos TODO lo que esté en 'out'
+          folder: out/wwwroot
           branch: gh-pages
