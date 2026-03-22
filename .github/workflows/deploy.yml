@@ -21,10 +21,18 @@ jobs:
       - name: Publish Project
         run: dotnet publish -c Release -o out
 
-      - name: Create and Fix Index
+      - name: Create index.html and Fix Routes
         run: |
           cd out/wwwroot
-          # 1. Crear el index.html limpio (Ajusta los nombres de tus CSS si son distintos)
+          
+          # Detectamos el nombre del archivo CSS principal (que suele ser NombreProyecto.styles.css)
+          CSS_FILE=$(find css -name "*.css" | head -n 1)
+          # Si no hay carpeta CSS, buscamos en la raíz de wwwroot
+          if [ -z "$CSS_FILE" ]; then CSS_FILE=$(find . -name "*.styles.css" | head -n 1); fi
+
+          echo "Detectado CSS: $CSS_FILE"
+
+          # Creamos el index.html inyectando el base href exacto de tu repo
           echo '<!DOCTYPE html>
           <html lang="en">
           <head>
@@ -41,13 +49,10 @@ jobs:
               <script src="_framework/blazor.webassembly.js"></script>
           </body>
           </html>' > index.html
-
-          # 2. IMPORTANTE: Asegúrate de que el nombre del repo arriba sea EXACTO al de GitHub
           
-          # 3. Forzar el .nojekyll
           touch .nojekyll
           
-          # 4. Ver los primeros archivos para confirmar en el log
+          # Verificación final de rutas en el log
           ls -R
 
       - name: Upload to GitHub Pages
