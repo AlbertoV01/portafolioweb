@@ -13,16 +13,22 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '10.0.200' # Asegúrate que coincida con tu versión
+          dotnet-version: '8.0.x'
 
-      - name: Publish
+      - name: Publish Project
+        # Forzamos la creación de la carpeta release
         run: dotnet publish -c Release -o release
 
-      - name: Fix base-path
-        run: sed -i 's/<base href="\/" \/>/<base href="\/portafolioweb\/" \/>/g' release/wwwroot/index.html
+      - name: Debug - List files
+        # Esto nos dirá en el log de GitHub si el archivo index.html realmente existe ahí
+        run: ls -R release/wwwroot
 
-      - name: copy index.html to 404.html
-        run: cp release/wwwroot/index.html release/wwwroot/404.html
+      - name: Fix base-path
+        # Cambiamos el comando para que sea más flexible con las comillas
+        run: sed -i 's|base href="/"|base href="/portafolioweb/"|g' release/wwwroot/index.html
+
+      - name: Add .nojekyll
+        run: touch release/wwwroot/.nojekyll
 
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
