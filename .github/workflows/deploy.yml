@@ -19,24 +19,28 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish Project
-        run: dotnet publish -c Release -o release
+        # Publicamos en una carpeta simple llamada "out"
+        run: dotnet publish -c Release -o out
 
-      - name: Fix base-path and index
+      - name: Find and Fix index.html
         run: |
-          # 1. Buscamos cualquier .html que actúe como entrada y lo renombramos a index.html si no existe
-          find release/wwwroot -name "*.html" -exec cp {} release/wwwroot/index.html \;
+          # Buscamos donde sea que esté el index.html (o cualquier .html) y lo movemos a la raíz de 'out'
+          target_file=$(find out -name "index.html" | head -n 1)
+          if [ -z "$target_file" ]; then
+            target_file=$(find out -name "*.html" | head -n 1)
+          fi
           
-          # 2. Aplicamos el cambio de base href al index.html
-          sed -i 's|<base href="/" />|<base href="/portafolioweb/" />|g' release/wwwroot/index.html
+          echo "Archivo encontrado en: $target_file"
+          cp "$target_file" out/index.html
           
-          # 3. Verificamos que el archivo exista para que el log nos confirme
-          ls -la release/wwwroot/index.html
-
-      - name: Add .nojekyll
-        run: touch release/wwwroot/.nojekyll
+          # Aplicamos el cambio al archivo que acabamos de copiar
+          sed -i 's|<base href="/" />|<base href="/portafolioweb/" />|g' out/index.html
+          
+          # Creamos el archivo .nojekyll en la raíz de salida
+          touch out/.nojekyll
 
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: release/wwwroot
+          folder: out # Subimos TODO lo que esté en 'out'
           branch: gh-pages
