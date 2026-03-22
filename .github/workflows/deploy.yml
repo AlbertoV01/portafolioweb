@@ -2,7 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # Se activa al subir cambios a main
+    branches: [ main ]
+
+permissions:
+  contents: write # Permiso crucial para que GitHub pueda crear la rama gh-pages
 
 jobs:
   deploy:
@@ -16,22 +19,20 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish Project
-        # Forzamos la creación de la carpeta release
+        # Usamos -c Release y nos aseguramos de que se limpie antes
         run: dotnet publish -c Release -o release
 
-      - name: Debug - List files
-        # Esto nos dirá en el log de GitHub si el archivo index.html realmente existe ahí
-        run: ls -R release/wwwroot
-
-      - name: Fix base-path
-        # Cambiamos el comando para que sea más flexible con las comillas
-        run: sed -i 's|base href="/"|base href="/portafolioweb/"|g' release/wwwroot/index.html
+      - name: Fix base-path (Auto-detect)
+        # Este comando busca el archivo index.html en cualquier subcarpeta de 'release' y lo modifica
+        run: |
+          find release -name "index.html" -exec sed -i 's|base href="/"|base href="/portafolioweb/"|g' {} +
+          find release -name "index.html" -exec sed -i 's|base href="/"|base href="/portafolioweb/"|g' {} +
 
       - name: Add .nojekyll
-        run: touch release/wwwroot/.nojekyll
+        run: touch release/wwwroot/.nojekyll || touch release/.nojekyll
 
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: release/wwwroot
+          folder: release/wwwroot # Si falla aquí, prueba cambiando a solo: release
           branch: gh-pages
