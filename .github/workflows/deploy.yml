@@ -18,15 +18,18 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Install WASM Tools
+        # Esta es la pieza que faltaba para que no de error NETSDK1147
+        run: dotnet workload install wasm-tools
+
       - name: Publish Project
-        # Publicamos todo en la carpeta 'out'
         run: dotnet publish -c Release -o out
 
-      - name: Create index.html (Rutas Reales)
+      - name: Create index.html
         run: |
           cd out/wwwroot
           
-          # Creamos el index.html apuntando a app.css en la RAÍZ (sin carpeta css/)
+          # Creamos el index.html con tus rutas reales (app.css en la raíz)
           echo '<!DOCTYPE html>
           <html lang="en">
           <head>
@@ -43,11 +46,7 @@ jobs:
           </body>
           </html>' > index.html
           
-          # Forzamos el .nojekyll
           touch .nojekyll
-          
-          # Verificamos si realmente se creó algo en _framework
-          ls -R _framework || echo "LA CARPETA _FRAMEWORK ESTÁ VACÍA"
 
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
