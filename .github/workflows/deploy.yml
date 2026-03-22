@@ -19,25 +19,42 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish Project
-        # Publicamos específicamente el proyecto del lado del cliente
+        # Si tu carpeta de proyecto cliente se llama distinto, cámbialo aquí:
         run: dotnet publish -c Release -o out
 
-      - name: Generate Index.html for GitHub
+      - name: Create index.html if missing
         run: |
-          # En .NET 8 Web App, el archivo de salida se suele llamar 'wwwroot/_framework/blazor.webassembly.js'
-          # pero GitHub necesita un 'index.html' en la raíz. 
-          # Buscamos el archivo generado (que suele estar en out/wwwroot)
-          
+          # Entramos a la carpeta de salida
           cd out/wwwroot
-          # Si no existe index.html, lo creamos o renombramos el que exista
+          
+          # Si NO hay un index.html (común en .NET 8 Web App), lo creamos desde cero
           if [ ! -f index.html ]; then
-            cp $(find . -name "*.html" | head -n 1) index.html || echo "No HTML found"
+            echo '<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Portafolio</title>
+                <base href="/portafolioweb/" />
+                <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+                <link rel="stylesheet" href="css/app.css" />
+                <link rel="icon" type="image/png" href="favicon.png" />
+            </head>
+            <body>
+                <div id="app">Cargando...</div>
+                <div id="blazor-error-ui">
+                    An unhandled error has occurred.
+                    <a href="" class="reload">Reload</a>
+                    <a class="dismiss">🗙</a>
+                </div>
+                <script src="_framework/blazor.webassembly.js"></script>
+            </body>
+            </html>' > index.html
+          else
+            # Si ya existía, solo corregimos el base href
+            sed -i 's|<base href="/" />|<base href="/portafolioweb/" />|g' index.html
           fi
           
-          # Corrección del base href
-          sed -i 's|<base href="/" />|<base href="/portafolioweb/" />|g' index.html
-          
-          # Crear .nojekyll para que GitHub no bloquee carpetas con guion bajo (_)
           touch .nojekyll
 
       - name: Upload to GitHub Pages
