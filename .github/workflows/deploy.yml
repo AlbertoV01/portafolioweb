@@ -19,20 +19,14 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish Project
+        # Publicamos todo en la carpeta 'out'
         run: dotnet publish -c Release -o out
 
-      - name: Create index.html and Fix Routes
+      - name: Create index.html (Rutas Reales)
         run: |
           cd out/wwwroot
           
-          # Detectamos el nombre del archivo CSS principal (que suele ser NombreProyecto.styles.css)
-          CSS_FILE=$(find css -name "*.css" | head -n 1)
-          # Si no hay carpeta CSS, buscamos en la raíz de wwwroot
-          if [ -z "$CSS_FILE" ]; then CSS_FILE=$(find . -name "*.styles.css" | head -n 1); fi
-
-          echo "Detectado CSS: $CSS_FILE"
-
-          # Creamos el index.html inyectando el base href exacto de tu repo
+          # Creamos el index.html apuntando a app.css en la RAÍZ (sin carpeta css/)
           echo '<!DOCTYPE html>
           <html lang="en">
           <head>
@@ -40,8 +34,7 @@ jobs:
               <meta name="viewport" content="width=device-width, initial-scale=1.0" />
               <title>Portafolio</title>
               <base href="/portafolioweb/" />
-              <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-              <link rel="stylesheet" href="css/app.css" />
+              <link rel="stylesheet" href="app.css" />
               <link rel="icon" type="image/png" href="favicon.png" />
           </head>
           <body>
@@ -50,10 +43,11 @@ jobs:
           </body>
           </html>' > index.html
           
+          # Forzamos el .nojekyll
           touch .nojekyll
           
-          # Verificación final de rutas en el log
-          ls -R
+          # Verificamos si realmente se creó algo en _framework
+          ls -R _framework || echo "LA CARPETA _FRAMEWORK ESTÁ VACÍA"
 
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
