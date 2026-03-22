@@ -1,0 +1,278 @@
+@page "/"
+@using Microsoft.AspNetCore.Components.Endpoints.Infrastructure
+@using Microsoft.AspNetCore.Components.Web
+
+@inject IJSRuntime JSRuntime
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top rounded-pill">
+    <div class="container">
+        <a class="navbar-brand" >Portafolio Web</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="#inicio">Inicio</a>
+            <a class="nav-link" href="#sobre-mi">Sobre mí</a>
+            <a class="nav-link" href="#proyectos">Proyectos</a>
+            <a class="nav-link" href="#certificados">Certificados</a>
+            <a class="nav-link" href="#contacto">Contacto</a>
+        </div>
+    </div>
+</nav>
+
+<section id="inicio" class="py-5 text-center reveal">
+    <div class="container modern-box py-5">
+        <h1 class="display-7 fw-bold">Hola, soy Alberto Desarrollador C#</h1>
+        <p class="lead">Enfoque en soluciones .NET y en el desarrollo de aplicaciones robustas.</p>
+    
+        <span class="principal-badge"><a href="https://github.com/AlbertoV01" target="_blank" class="text-white text-decoration-none">GitHub</a></span>
+        <span class="principal-badge"><a href="https://www.linkedin.com/in/alberto-valenzuela-rivera-2a4b86225/" target="_blank" class="text-white text-decoration-none">LinkedIn</a></span>
+        
+    </div>
+    <div class="py-5 container">
+        <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="csharp" />
+        <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="efcore"
+        <img src="https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white" alt="sql" />
+        <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+        <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+        <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+    </div>
+    
+</section>
+
+<section id="sobre-mi" class="container py-5 my-5 reveal">
+
+    <div class="row align-items-center modern-box">
+        <div class="col-md-6 text-white">
+            <h2 class="title">Sobre Mí</h2 >
+            <p class="subtitle">
+                Formación profesional en Ing. en Sistemas Comptacionales, me gusta construir software y entender cómo funciona la tecnología 
+                desde el código hasta el hardware. Mi enfoque combina el uso de las 
+                tecnologías del entorno .NET como WindowsForms, Blazor, Aplicaciones Android en .NET MAUI y
+                Apliaciones de Consola en C#. 
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="p-5 rounded foto">
+                <img src="\images\usuario.png" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="proyectos" class="py-5 my-5 reveal">
+    <div class="container modern-box">
+        <h2 class="text-center display-5 fw-bold mb-5 text-white">Mis Proyectos</h2>
+        <div class="row">
+    @foreach (var project in MyProjects)
+    {
+        <div class="col-md-4 mb-4 ">
+            <div class="card h-100 shadow-sm project-card">
+                <img src="@project.ImageUrl" class="card-img-top" alt="@project.Title">
+                <a href="@project.Link" target="_blank" class="stretched-link"></a>
+                <div class="card-body text-center navbar ">
+                    <h5 class="card-title fw-bold text-white">@project.Title</h5>
+                    <p class="card-text small text-white">@project.Description</p>
+
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                        @foreach (var tech in project.Technologies)
+                        {
+                            <span class="tech-badge">@tech</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+
+    </div>
+</section>
+
+<section id="certificados" class="reveal">
+    <div class="container">
+        <h2 class="text-center display-5 fw-bold mb-5 text-white">Certificaciones y Logros</h2>
+
+        <div id="carouselCertificados" class="carousel slide shadow-lg" data-bs-ride="carousel">
+            
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselCertificados" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselCertificados" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselCertificados" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner rounded-4">
+                
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <a href="https://cert.efset.org/c2KqVj" target="_blank">
+                    <div class="certificate-wrapper">
+                       <img src="/images/cenglish.png" class="d-block w-100 certificate-img" > 
+                    </div>
+                    </a>
+                </div>
+
+                <div class="carousel-item" data-bs-interval="5000">
+                    <a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-41fb9792-e368-45fe-87b6-e1ac2bef7b7b.pdf" target="_blank">
+                    <div class="certificate-wrapper">
+                       <img src="/images/ccsharp.jpg" class="d-block w-100 certificate-img" > 
+                        
+                    </div> 
+                    </a>
+                </div>
+
+                <div class="carousel-item" data-bs-interval="5000">
+                    <a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-d19998b4-e9d5-4104-9091-a050ec360f82.pdf" target="_blank">
+                    <div class="certificate-wrapper">
+                       <img src="/images/csql.jpg" class="d-block w-100 certificate-img" alt="Certificado SQL Server"> 
+                    </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCertificados" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselCertificados" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<section id="contacto" class="py-5 reveal bg-gray-700 rounded">
+    <div class="container contenedor">
+        <div class="row justify-content-center">
+            <div class="col-md-6 shadow-lg p-4 rounded-4 modern-box">
+                <h2 class="text-center mb-4 fw-bold">¡Hablemos!</h2>
+                <p class="text-center mb-4 text-white">¿Tienes una idea de negocio o necesitas una reparación técnica? Escríbeme.</p>
+
+                <EditForm Model="@contact" OnValidSubmit="HandleSubmit">
+                    <DataAnnotationsValidator />
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nombre</label>
+                        <InputText @bind-Value="contact.Name" class="form-control" placeholder="Tu nombre" />
+                        <ValidationMessage For="@(() => contact.Name)" class="text-danger small" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Correo Electrónico</label>
+                        <InputText @bind-Value="contact.Email" class="form-control" placeholder="correo@ejemplo.com" />
+                        <ValidationMessage For="@(() => contact.Email)" class="text-danger small" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Mensaje</label>
+                        <InputTextArea @bind-Value="contact.Message" class="form-control" rows="4" placeholder="¿En qué puedo ayudarte?" />
+                        <ValidationMessage For="@(() => contact.Message)" class="text-danger small" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow-sm mt-3">
+                        Enviar Mensaje
+                    </button>
+                </EditForm>
+
+                @if (formEnviado)
+                {
+                    <div class="alert alert-success mt-4 text-center">
+                        ✅ ¡Gracias! Me pondré en contacto contigo pronto.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+        <p class="mb-0">© 2026 - Desarrollador .NET</p>
+        <div class="mt-2">
+            <a href="https://github.com/AlbertoV01" class="text-white me-3 text-decoration-none">GitHub</a>
+            <a href="https://www.linkedin.com/in/alberto-valenzuela-rivera-2a4b86225/" class="text-white me-3 text-decoration-none">LinkedIn</a>
+            
+        </div>
+    </div>
+</footer>
+
+@code {
+    private ContactMessage contact = new();
+    private bool formEnviado = false;
+    
+
+    private async Task HandleSubmit()
+        {
+            // servicio de correo o una API
+            Console.WriteLine($"Mensaje de: {contact.Name} ({contact.Email})");
+            
+            formEnviado = true;
+            
+            // Limpiamos el formulario después del envío
+            contact = new ContactMessage();
+            
+            await Task.Delay(5000);
+            formEnviado = false;
+        }
+
+
+    private List<Project> MyProjects = new()
+    {
+        new Project 
+        { 
+            Title = "GTranslator", 
+            Description = "(En progreso) Aplicación de traducción en tiempo real para juegos, utilizando OCR y un diccionario local",
+            ImageUrl = "",
+            Technologies = new List<string> { ".NET MAUI", "C#", "Android", "Gemini"}
+        },
+        new Project 
+        { 
+            Title = "Portafolio Web", 
+            Description = "Página Web tipo Landing Page donde se muestra mi experiencia, tecnologías usadas y proyectos realizados",
+            ImageUrl = "",
+            Technologies = new List<string> { "Blazor", "C#", "Gemini"}
+        },
+        new Project 
+        { 
+            Title = "Sitio Web de Beisbol", 
+            Description = "Sitio web para un equipo de beisbol local, con información de jugadores, juegos jugados y resultados",
+            ImageUrl = "https://raw.githubusercontent.com/AlbertoV01/baseballweb/refs/heads/main/images/1.png",
+            Technologies = new List<string> { "Blazor", "C#", "SQL Lite", "Entity Framework Core", "Bootstrap", "Gemini" },
+            Link = "https://github.com/AlbertoV01/baseballweb"
+        },
+        
+        new Project 
+        { 
+            Title = "Proyecto de Inventario", 
+            Description = "Proyecto de inventario desarrollado en C# con Windows Forms, utilizando una base de datos SQL Server para gestionar productos y ventas",
+            ImageUrl = "https://raw.githubusercontent.com/AlbertoV01/Transacciones/refs/heads/main/Transacciones/Resources/images/img1.png",
+            Technologies = new List<string> { "C#", "Windows Forms", "SQL Server", "TSQL" },
+            Link = "https://github.com/AlbertoV01/Transacciones"
+        },
+
+        new Project{
+            Title = "Mini Sistema Gestor de Base de datos", 
+            Description = "MSGBD es un proyecto que realiza operaciones básicas de un sistema gestor de base de datos, como creación de tablas, inserción de datos, consultas y eliminación, utilizando C# para la lógica del programa y SQL Server como sistema de gestión de bases de datos.",
+            ImageUrl = "https://raw.githubusercontent.com/AlbertoV01/MiniSGBD/refs/heads/master/images/img1.png",
+            Technologies = new List<string> { "C#", "Windows Forms", "SQL Server"},
+            Link = "https://github.com/AlbertoV01/Asistencia"
+        },
+
+        new Project{
+            Title = "Métodos Numéricos", 
+            Description = "Aplicación que permite resolver problemas matemáticos utilizando métodos numéricos como el método de bisección, método de falsa posición, método de Gauss, entre otros, desarrollada en C# con una interfaz gráfica sencilla.",
+            ImageUrl = "https://github.com/AlbertoV01/Metodos-Numericos-401/blob/master/M%C3%A9todos%20Num%C3%A9ricos%20401/Images/imagePrincipal.png?raw=true",
+            Technologies = new List<string> { "C#", "Windows Forms"},
+                Link = "https://github.com/AlbertoV01/Metodos-Numericos-401"
+        },
+        new Project{
+            Title = "Aplicación de Asistencia", 
+            Description = "Permite tomar asistencia de estudiantes y registrarlas en una base de datos MongoDB",
+            ImageUrl = "https://github.com/AlbertoV01/Asistencia/blob/main/images/Screenshot_20250118_152100.jpg?raw=true",
+            Technologies = new List<string> { ".NET MAUI", "MongoDB"},
+            Link = "https://github.com/AlbertoV01/Asistencia"
+
+        }
+
+
+
+    };
+    
+}
