@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # Se activa al subir cambios a main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.200' # Asegúrate que coincida con tu versión
+
+      - name: Publish
+        run: dotnet publish -c Release -o release
+
+      # Este paso es vital para que las rutas funcionen en GitHub Pages
+      - name: Fix base-path
+        run: sed -i 's/<base href="\/" \/>/<base href="\/TU_REPOSITORIO\/" \/>/g' release/wwwroot/index.html
+
+      # Copia el index.html a 404.html para que Blazor maneje las rutas correctamente
+      - name: copy index.html to 404.html
+        run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+      - name: Upload to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: release/wwwroot
+          branch: gh-pages # GitHub creará esta rama automáticamente para la web
