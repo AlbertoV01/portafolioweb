@@ -63,7 +63,7 @@
     {
         <div class="col-md-4 mb-4 ">
             <div class="card h-100 shadow-sm project-card">
-                <img src="@project.ImageUrl" class="card-img-top" alt="@project.Title">
+                <img src="./@project.ImageUrl" class="card-img-top" alt="@project.Title">
                 <a href="@project.Link" target="_blank" class="stretched-link"></a>
                 <div class="card-body text-center navbar ">
                     <h5 class="card-title fw-bold text-white">@project.Title</h5>
@@ -143,7 +143,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 shadow-lg p-4 rounded-4 modern-box">
                 <h2 class="text-center mb-4 fw-bold">¡Hablemos!</h2>
-                <p class="text-center mb-4 text-white">¿Tienes una idea de negocio o necesitas una reparación técnica? Escríbeme.</p>
+                <p class="text-center mb-4 text-white">Si tienes dudas puedes contactarme a través del formulario de contacto.</p>
 
                 <EditForm Model="@contact" OnValidSubmit="HandleSubmit">
                     <DataAnnotationsValidator />
