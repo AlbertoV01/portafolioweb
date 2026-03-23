@@ -1118,10 +1118,10 @@ C:\Proyectos\PortfolioW\obj\Debug\net10.0\PortfolioW.dll
 C:\Proyectos\PortfolioW\obj\Debug\net10.0\refint\PortfolioW.dll
 C:\Proyectos\PortfolioW\obj\Debug\net10.0\PortfolioW.pdb
 C:\Proyectos\PortfolioW\obj\Debug\net10.0\ref\PortfolioW.dll
-C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.7bnnibepiw.wasm
-C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.hswxww0wnl.pdb
-C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.7bnnibepiw.wasm.gz
-C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.hswxww0wnl.pdb.gz
-C:\Proyectos\PortfolioW\obj\Debug\net10.0\compressed\0ylb0rxlcs-{0}-7bnnibepiw-7bnnibepiw.gz
-C:\Proyectos\PortfolioW\obj\Debug\net10.0\compressed\vnrbqmpjej-{0}-hswxww0wnl-hswxww0wnl.gz
-C:\Proyectos\PortfolioW\obj\Debug\net10.0\compressed\zqvw2h0zn0-{0}-4ssazaa9gy-4ssazaa9gy.gz
+C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.omfpr7yryq.wasm
+C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.nv0j2i78d6.pdb
+C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.omfpr7yryq.wasm.gz
+C:\Proyectos\PortfolioW\bin\Debug\net10.0\wwwroot\_framework\PortfolioW.nv0j2i78d6.pdb.gz
+C:\Proyectos\PortfolioW\obj\Debug\net10.0\compressed\0ylb0rxlcs-{0}-omfpr7yryq-omfpr7yryq.gz
+C:\Proyectos\PortfolioW\obj\Debug\net10.0\compressed\vnrbqmpjej-{0}-nv0j2i78d6-nv0j2i78d6.gz
+C:\Proyectos\PortfolioW\obj\Debug\net10.0\compressed\zqvw2h0zn0-{0}-nl55w3g84x-nl55w3g84x.gz
