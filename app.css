@@ -240,4 +240,11 @@ section{
     padding: 20px;
 }
 
+/* Oculta la barra de error de Blazor por completo */
+#blazor-error-ui {
+    display: none !important;
+}
  
+.certificadosbg{
+    background: linear-gradient(135deg, #0f2027, #1c1f26);
+}
