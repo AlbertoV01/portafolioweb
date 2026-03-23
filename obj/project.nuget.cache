@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GtcS0Uzj/ac=",
+  "dgSpecHash": "Yvw0bkMEju4=",
   "success": true,
   "projectFilePath": "C:\\Proyectos\\PortfolioW\\PortfolioW.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\Alber\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\10.0.5\\microsoft.aspnetcore.components.webassembly.10.0.5.nupkg.sha512",
     "C:\\Users\\Alber\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.devserver\\10.0.5\\microsoft.aspnetcore.components.webassembly.devserver.10.0.5.nupkg.sha512",
     "C:\\Users\\Alber\\.nuget\\packages\\microsoft.aspnetcore.metadata\\10.0.5\\microsoft.aspnetcore.metadata.10.0.5.nupkg.sha512",
+    "C:\\Users\\Alber\\.nuget\\packages\\microsoft.dotnet.hotreload.webassembly.browser\\10.0.200\\microsoft.dotnet.hotreload.webassembly.browser.10.0.200.nupkg.sha512",
     "C:\\Users\\Alber\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.5\\microsoft.extensions.configuration.10.0.5.nupkg.sha512",
     "C:\\Users\\Alber\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.5\\microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512",
     "C:\\Users\\Alber\\.nuget\\packages\\microsoft.extensions.configuration.binder\\10.0.5\\microsoft.extensions.configuration.binder.10.0.5.nupkg.sha512",
