@@ -23,8 +23,7 @@ jobs:
 
       # 4. Cambiar el <base href="/" /> por el nombre del repo para que carguen los estilos
       # REEMPLAZA 'PortfolioW' por el nombre exacto de tu repositorio en GitHub
-      - name: Change base-tag in index.html from / to PortfolioW
-        run: sed -i 's/<base href="\/" \/>/<base href="\/PortfolioW\/" \/>/g' release/wwwroot/index.html
+      
 
       # 5. Copiar index.html a 404.html para soportar navegación directa
       - name: copy index.html to 404.html
